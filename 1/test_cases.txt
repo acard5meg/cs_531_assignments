@@ -1,0 +1,21 @@
+
+Test case ideas
+
+INPUT
+
+Empty string - Press enter
+All spaces - size doesn't matter
+String with 1 letter
+String with any of the invalid characters
+String with 25 characters
+String with 26 characters
+Awkward strings e.g. different language (αηυβ)
+Repeat string for different inputs e.g. repeat string 1 on the 6th input
+
+A/D input
+Try lowercase A/D
+Add spaces everywhere but have A or D
+Different letters other than A/D
+Empty string
+All spaces
+

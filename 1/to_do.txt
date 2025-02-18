@@ -1,0 +1,10 @@
+
+Further testing for edge cases
+Double check cover empty string,  duplicate string, characters other than 'A', 'D' for sort
+Email professor about whether we need the udf prototypes listed or if we just need to hit the min number of files -- DONE
+Add comments to program
+	1. Add comment at top of program -- DONE
+	Add comments within the program to explain what's going on -- DONE
+Ensure name and G number is at top of all programs
+Create a read me file -- DONE
+Move to Zeus and retest - Use Direction for Assignment Submission Module on Canvas
