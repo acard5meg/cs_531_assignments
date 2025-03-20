@@ -1,3 +1,11 @@
+Read in IPv4 address/alias from file. 
+Bad number -> Good
+bad alias -> Good
+duplicate number -> Good
+duplicate alias -> Good
+empty file -> Good
+invalid filename -> Good
+
 Make sure you use nodes in different locations of the list including front, rear, somewhere in middle
 
 Do everything on an empty list
@@ -52,3 +60,5 @@ Try to overwrite a file -> Good
 
 For 8)
 Good
+
+All empty list 2-6 good

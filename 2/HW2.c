@@ -2,7 +2,13 @@
 
 int main(void) {
 
-    struct address_t *ip4_addr = NULL, *temp_ptr = NULL;
+    // struct address_t *ip4_addr = NULL, *temp_ptr = NULL;
+    struct address_t *ip4_addr = NULL;
+    struct address_t *temp_ptr = NULL;
+
+    // reads initial list
+    read_input_list(&ip4_addr);
+
 
     int num_addresses = 0;
     int curr_inp;

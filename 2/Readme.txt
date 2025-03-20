@@ -9,7 +9,7 @@ Last Modified: March 19, 2025
 Description
 
 Files
-The project contains 10 C source files, one header file, and a Makefile.
+The project contains 11 C source files, one header file, and a Makefile.
 
 header.h: This header file contains the function declarations for all functions used throughout the programs. It also includes the preprocessor directives for standard libraries.
 
@@ -38,7 +38,10 @@ display_alias: Prompts user for network address and displays any IPv4 within the
 save_list: Contains functions required to save linked list to file designated by user
            save_list, get_filename  
 
-quit: Quits the program           
+quit: Quits the program
+
+read_input_list: Contains function required to read initial list of IPv4 address/alias pairs
+                 and do error checking for invalid address/alias/duplciates
 
 Makefile: This file automates the compilation and linking the program. It specifies the compiler to use, compiler flags, and libraries to link.
 
@@ -126,6 +129,11 @@ get_filename: void input, char pointer return. Gets filename from user.
 
 quit.c
 quit: void input and output. Exits the program with code of 0.
+
+read_input_list.c
+read_input_list: struct adress_t double pointer input, void output. Prompts user for 
+                 file name to read and reads file line by line parsing input for 
+                 IPv4 address components and alias. Does error checking while reading file
 
 
 The program is compiled on Zeus on the CS Department Linux Server using gcc. 
