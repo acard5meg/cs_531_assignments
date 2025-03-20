@@ -1,10 +1,13 @@
+// This file contains the code to execute menu option
+// 4) Delete address
 #include "header.h"
 
-void delete_address(struct address_t *curr_ip4) {
+void delete_address(struct address_t **curr_ip4) {
 
     char *error_message = "Alias doesn't exixt!\n";
 
-    if (curr_ip4 == NULL) {
+    // if (curr_ip4 == NULL) {
+    if (*curr_ip4 == NULL) {
         printf("List is empty, alias not present!\n");
         return;
     }
@@ -29,7 +32,7 @@ void delete_address(struct address_t *curr_ip4) {
 
     struct address_t *return_val;
 
-    return_val = find_node(curr_ip4, user_input);
+    return_val = find_node(*curr_ip4, user_input);
 
     if (return_val == NULL) {
         printf("%s", error_message);
@@ -46,12 +49,19 @@ void delete_address(struct address_t *curr_ip4) {
 }
 
 // We've prevented a situation where the alias DNE in the list
-void remove_node(struct address_t *ipv4, char curr_alias[]) {
+// Pointer to a pointer to allow the function to update the 
+// linked list inside the function and not return something
+void remove_node(struct address_t **ipv4, char curr_alias[]) {
 
-    struct address_t *fast = ipv4;
-    struct address_t *slow = NULL;
+    if (equal_name2((*ipv4) -> alias, curr_alias)) {
+        *ipv4 = (*ipv4) -> next;
+        return;
+    }
 
-    while (strcmp(fast -> alias, curr_alias) != 0) {
+    struct address_t *fast = (*ipv4) -> next;
+    struct address_t *slow = (*ipv4);
+
+    while (fast != NULL && ! equal_name2(fast -> alias, curr_alias)) {
         slow = fast;
         fast = fast -> next;
     }
@@ -59,6 +69,8 @@ void remove_node(struct address_t *ipv4, char curr_alias[]) {
     slow -> next = fast -> next;
 }
 
+// The get_deletion() function ensures we'll either have a Y or N
+// so the return statement doesn't need to be inside a loop
 bool confirm_deletion(struct address_t *curr_node) {
     int i;
     for (i = 0; i < IP_LENGTH-1; i++)

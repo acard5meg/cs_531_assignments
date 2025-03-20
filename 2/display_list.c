@@ -1,5 +1,8 @@
+// This file contains the code to execute menu option
+// 5) Display list
 #include "header.h"
 
+// Displays the list one node at a time along with the number of nodes in the list
 void display_list(struct address_t *ip4) {
     if (ip4 == NULL) {
         printf("The list is empty!\n");
@@ -16,7 +19,6 @@ void display_list(struct address_t *ip4) {
     }
     printf("Number of nodes in the list: %d\n", num_nodes);
 
-    free(temp_ptr);
 }
 
 void display_node(struct address_t *curr_node) {
@@ -25,7 +27,7 @@ void display_node(struct address_t *curr_node) {
     int i;
     for (i = 0; i < IP_LENGTH-1; i++)
         printf("%d.", curr_node -> octet[i]);
-    printf("%d\n", curr_node -> octet[i]);
+    printf("%d. ", curr_node -> octet[i]);
 
     printf("Alias: %s\n", curr_node -> alias);
 }
