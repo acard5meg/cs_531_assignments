@@ -3,9 +3,6 @@
 
 #include "header.h"
 
-// Without guidance assuming an arbitrarty file size length of 260
-#define MAX_FILENAME_LENGTH 260
-
 void save_list(struct address_t *ll) {
 
     if (ll == NULL) {
@@ -43,7 +40,7 @@ char *get_filename(void) {
     // for now assume the user enters a proper filename
     // Including no invalid characters and proper file extension
 
-    printf("Enter filename.extension to save the linked list: ");
+    printf("Enter filename.extension to the linked list: ");
 
     int curr_let = 0;
 

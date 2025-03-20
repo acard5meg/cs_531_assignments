@@ -9,6 +9,8 @@
 #define ALIAS_LEN 10
 #define IP_LENGTH 4
 #define IP_COMPONENT_LENTH 3
+// Without guidance assuming an arbitrarty file size length of 260
+#define MAX_FILENAME_LENGTH 260
 // #define TOTAL_IPV4 3
 
 // global definition for structure used in assignment
@@ -17,6 +19,9 @@ struct address_t{
     char alias[11];
     struct address_t *next;
 } ;
+
+//read_input_list.c
+void read_input_list(struct address_t **);
 
 // menu_input.c
 void display_menu(void);

@@ -8,7 +8,7 @@
 void add_address(struct address_t **addr) {
     
     printf("Please enter the IPv4 address and an alias ");
-    printf("in the format X.X.X.X alias. The values X must ");
+    printf("in the format X.X.X.X alias.\nThe values X must ");
     printf("be between 0 and 255 inclusive and the alias ");
     printf("less than or equal to 10 characters: ");
 

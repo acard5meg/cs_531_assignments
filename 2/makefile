@@ -1,8 +1,5 @@
 objects = HW2.o menu_input.o add_address.o lookup_addr.o update_addr.o \
-delete_address.o display_list.o display_alias.o save_list.o quit.o
-
-# objects = HW1.o read_word.o clear_input_stream.o not_valid_character.o \
-# print_functions.o is_duplicate_string.o sort_functions.o get_sort_order.o
+delete_address.o display_list.o display_alias.o save_list.o quit.o read_input_list.o
 
 HW2: $(objects)
 	gcc -o HW2 $(objects)
@@ -26,20 +23,9 @@ save_list.o: save_list.c header.h
 	gcc -c save_list.c
 quit.o: quit.c header.h
 	gcc -c quit.c
-# read_word.o: read_word.c header.h
-# 	gcc -c read_word.c
-# clear_input_stream.o: clear_input_stream.c header.h
-# 	gcc -c clear_input_stream.c
-# not_valid_character.o: not_valid_character.c header.h
-# 	gcc -c not_valid_character.c
-# print_functions.o: print_functions.c header.h
-# 	gcc -c print_functions.c
-# is_duplicate_string.o: is_duplicate_string.c header.h
-# 	gcc -c is_duplicate_string.c
-# sort_functions.o: sort_functions.c header.h
-# 	gcc -c sort_functions.c
-# get_sort_order.o: get_sort_order.c header.h
-# 	gcc -c get_sort_order.c
+read_input_list.o: read_input_list.c header.h
+	gcc -c read_input_list.c
+
 clean:
 	rm *.o
 	rm -rf core
