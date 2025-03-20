@@ -1,5 +1,9 @@
+// This file contains the code to execute menu option
+// 7) Save to file
+
 #include "header.h"
 
+// Without guidance assuming an arbitrarty file size length of 260
 #define MAX_FILENAME_LENGTH 260
 
 void save_list(struct address_t *ll) {
@@ -28,7 +32,6 @@ void save_list(struct address_t *ll) {
     }
     fclose(f);
 
-
     free(filename);
 
 }
@@ -38,6 +41,7 @@ char *get_filename(void) {
     char filename[MAX_FILENAME_LENGTH + 1], user_inp;
 
     // for now assume the user enters a proper filename
+    // Including no invalid characters and proper file extension
 
     printf("Enter filename.extension to save the linked list: ");
 

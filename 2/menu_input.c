@@ -29,11 +29,10 @@ int get_user_input(char *message_to_user, char *error_message) {
             num_inputs++;
         }
 
-        
         // val will be called repeatedly in main
         // if the value is 0 this will indicate a bad input
         if (num_inputs != 1) {
-            printf("%s: ", error_message);
+            printf("%s ", error_message);
             num_inputs = 0;
             continue;
         }
