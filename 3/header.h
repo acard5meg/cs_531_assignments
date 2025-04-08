@@ -24,6 +24,7 @@ CREATE TABLE CS531_Inet (IPv4 varchar(255),alias varchar(255));
 #define MAX_FILENAME_LENGTH 260
 #define DBNAME "acard"
 #define TABLE_NAME "CS531_Inet"
+#define PASSWORD [REQUEST_FROM_USER]
 // #define TOTAL_IPV4 3
 
 // global definition for structure used in assignment

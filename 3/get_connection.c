@@ -3,7 +3,7 @@
 MYSQL* get_connection() {
     static char *host ="helios.vse.gmu.edu";
     static char *user ="acard";
-    static char *pass = "zyleewhy";
+    static char *pass = PASSWORD;
     static char *dbname = DBNAME;
     // unsigned int port =3306;
     // static char *unix_socket = NULL;
