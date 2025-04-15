@@ -106,8 +106,11 @@ bool check_duplciates(struct address_t *curr_ip4, struct address_t *new_ip4) {
 
 bool equal_structures(struct address_t *curr_ip4, struct address_t *new_ip4) {
     
-    if (equal_ip(curr_ip4, new_ip4) || equal_name(curr_ip4, new_ip4))
+    if (equal_ip(curr_ip4, new_ip4) || equal_name(curr_ip4, new_ip4)) {
+        // printf("equal_ip: %d", equal_ip(curr_ip4, new_ip4));
+        // printf("equal_name: %d", equal_name(curr_ip4, new_ip4));
         return true;
+    }
     else
         return false;
 

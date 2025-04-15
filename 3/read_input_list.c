@@ -62,13 +62,6 @@ void read_input_list(struct address_t **addr, MYSQL *conn) {
 
         new_node -> alias[i] = temp_str[i];
 
-        // printf("first: %d\nsecond: %d\nthird: %d\nfourth: %d\nalias: %s\n", 
-        //     new_node -> octet[0],
-        //     new_node -> octet[1],
-        //     new_node -> octet[2],
-        //     new_node -> octet[3],
-        //     new_node -> alias);
-
         if (check_duplciates(*addr, new_node)) {
             printf("Already in list: %d.%d.%d.%d %s\n", first, second, third, fourth, temp_str);
             continue;
