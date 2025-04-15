@@ -1,21 +1,3 @@
-# CC   = gcc
-# OBJ  = test_connect.o add_address.o get_connection.o
-# SRC = test_connect.c
-# TARGET = connect
-# HEADER_FILE = header.h
-# connect: $(OBJ)
-# 	gcc -o connect $(OBJ) $(LIBS)
-# test_connect.o: test_connect.c header.h
-# 	gcc -c test_connect.c -Wall -I/usr/include/mysql
-# add_address.o: add_address.c header.h
-# 	gcc -c add_address.c
-# get_connection.o: get_connection.c header.h
-# 	gcc -c get_connection.c
-
-# objects = HW3.o menu_input.o add_address.o lookup_addr.o update_addr.o \
-# delete_address.o display_list.o display_alias.o save_list.o quit.o read_input_list.o
-
-# objects = HW3.o menu_input.o add_address.o read_input_list.o
 
 LIBS = $(shell mysql_config --cflags --libs)
 

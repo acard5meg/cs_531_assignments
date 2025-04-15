@@ -10,32 +10,88 @@ void save_list(struct address_t *ll, MYSQL *conn) {
         return;
     }
 
-    // char *filename = get_filename();
-
     struct address_t *temp = ll;
 
-    // FILE *f = fopen(filename, "w");
-
-    // if (f == NULL) {
-    //     printf("Couldn't open file!");
-    //     return;
-    // }
+    bool is_duplicate;
 
     char *temp_ip4 = NULL;
+    char query[255];
+
+    // delete all tables contents
+    sprintf(query, "TRUNCATE TABLE %s", TABLE_NAME);
+
+    mysql_query(conn, query);
+
     while (temp != NULL) {
         temp_ip4 = ip_to_string(temp -> octet[0], temp -> octet[1],
                 temp -> octet[2], temp -> octet[3] );
-        
-        char query[255];
 
-        sprintf(query, "INSERT INTO %s VALUES('%s','%s')", TABLE_NAME, temp_ip4, temp->alias);
-        
-        printf("%s\n", query);
-
-        if (mysql_query(conn, query));
+            sprintf(query, "INSERT INTO %s VALUES('%s','%s')", TABLE_NAME, temp_ip4, temp->alias);
+            mysql_query(conn, query);
 
         temp = temp -> next;
     }
+
+    // HAVE TO CHECK THAT IPV4 AND ALIAS ARE NOT DUPLICATED
+    // while (temp != NULL) {
+        
+        
+    //     is_duplicate = false;
+
+    //     sprintf(query, "SELECT * FROM %s", TABLE_NAME);
+
+    //     mysql_query(conn, query);
+        
+    //     MYSQL_RES *result = mysql_store_result(conn);
+
+    //     MYSQL_ROW row;
+
+    //     while ((row = mysql_fetch_row(result))) {
+    //         struct address_t *new_node = malloc(sizeof(struct address_t));
+    //         char temp_str[75];
+    //         int first, second, third, fourth;
+
+    //         sscanf(row[0], "%d.%d.%d.%d", &first, &second, &third, &fourth);
+    //         sscanf(row[1], "%s", temp_str);
+
+    //         new_node -> octet[0] = first;
+    //         new_node -> octet[1] = second;
+    //         new_node -> octet[2] = third;
+    //         new_node -> octet[3] = fourth;
+
+    //         int i = 0;
+    //         for ( ; temp_str[i] != '\0'; i++) {
+    //             new_node -> alias[i] = temp_str[i];
+    //         }
+
+    //         new_node -> alias[i] = temp_str[i];
+
+    //         bool temp_ip = equal_ip(temp, new_node);
+    //         bool temp_name = equal_name(temp, new_node);
+
+    //         if (temp_ip || temp_name) {
+    //             is_duplicate = true;
+    //             free(new_node);
+    //             break;
+    //         }
+
+    //         free(new_node);
+
+    //     }
+
+
+    //     mysql_free_result(result);
+
+    //     if (! is_duplicate) {
+    //         temp_ip4 = ip_to_string(temp -> octet[0], temp -> octet[1],
+    //             temp -> octet[2], temp -> octet[3] );
+
+    //         sprintf(query, "INSERT INTO %s VALUES('%s','%s')", TABLE_NAME, temp_ip4, temp->alias);
+    //         mysql_query(conn, query);
+    //     }
+
+    //     temp = temp -> next;
+    // }
 
 }
 
@@ -50,7 +106,6 @@ char *ip_to_string(int first, int second, int third, int fourth) {
     four_write = sprintf(fourth_str, "%d", fourth);
 
     int to_ret_len = one_write + two_write + three_write + four_write;
-    printf("length: %d\n", to_ret_len);
 
     char *to_return = (char *) malloc(sizeof(char) * (to_ret_len + 1));
 
@@ -89,35 +144,3 @@ char *ip_to_string(int first, int second, int third, int fourth) {
     return to_return;
 
 }
-
-// char *get_filename(void) {
-
-//     char filename[MAX_FILENAME_LENGTH + 1], user_inp;
-
-    // for now assume the user enters a proper filename
-    // Including no invalid characters and proper file extension
-
-//     printf("Enter filename.extension to the linked list: ");
-
-//     int curr_let = 0;
-
-//     while ((user_inp = getchar()) != '\n') {
-//         filename[curr_let++] = user_inp;
-//     }
-
-//     char *return_pointer = (char *) malloc(sizeof(char) * ( curr_let + 1 ));
-
-//     if( return_pointer == NULL ) {
-//         puts("Can't allocate memory!");
-//         exit(0);
-//     }
-
-//     char *temp_pointer = return_pointer;
-
-//     for (int i = 0; i < curr_let; i++, temp_pointer++)
-//         *temp_pointer = filename[i];
-
-//     *temp_pointer = '\0';
-
-//     return return_pointer;
-// }
