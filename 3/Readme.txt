@@ -9,11 +9,16 @@ Last Modified: April 15, 2025
 Description
 
 Files
-The project contains 11 C source files, one header file, and a Makefile.
+The project contains 12 C source files, one header file, and a Makefile.
 
-header.h: This header file contains the function declarations for all functions used throughout the programs. It also includes the preprocessor directives for standard libraries.
+header.h: This header file contains the function declarations 
+          for all functions used throughout the programs. It also 
+          includes the preprocessor directives for standard libraries.
+          It also includes the definitions for the SQL database including
+          user, table name, and password
 
-HW3.c: This is the main file which builds the linked list and utilizes all the user-defined functions
+HW3.c: This is the main file which connects to the SQL database, 
+       builds the linked list and utilizes all the user-defined functions
 
 menu_input.c: This file contains the functions display_menu and get_user_input.
 
@@ -35,20 +40,32 @@ display_list: This file contains all functions related to displaying the list.
 display_alias: Prompts user for network address and displays any IPv4 within the network.
                display_alias and alias_address_pairs
 
-save_list: Contains functions required to save linked list to file designated by user
-           save_list, get_filename  
+save_list: Contains functions required to save linked list to SQL database
+           save_list, ip_to_string
 
-quit: Quits the program
+quit: Quits the program and closes the SQL connection
 
 read_input_list: Contains function required to read initial list of IPv4 address/alias pairs
                  and do error checking for invalid address/alias/duplciates
 
-Makefile: This file automates the compilation and linking the program. It specifies the compiler to use, compiler flags, and libraries to link.
+get_connection: Contains function required to make initial connection to SQL database
+
+Makefile: This file automates the compilation and linking the program. 
+          It specifies the compiler to use, compiler flags, and libraries to link.
 
 Program Structure and Design
 
 Functions
 The program includes the following functions:
+
+get_connection.c
+get_connection: void input and MYSQL pointer return. Uses user defined macros to connect
+                to SQL database and returns pointer to connection
+
+read_input_list.c
+read_input_list: struct adress_t double pointer and MYSQL pointer input, void output. Reads table 
+                 by row parsing input for IPv4 address components and alias. 
+                 Does error checking while reading table
 
 menu_input.c
 display_menu: void input and void return value. Displays the menu to the user.
@@ -72,12 +89,9 @@ equal_name: 2 address_t structures input, bool output. Compares the IPv4 aliases
 			makes it not case sensitive.
 
 
-
 lookup_addr.c
 lookup_addr: struct address_t pointer input and void output. Prompts user for input alias and returns
              whether the alias exists. If so, display the IPv4 otherwise display error
-
-
 
 
 update_addr.c
@@ -108,7 +122,6 @@ confirm_deletion: struct address_t input, bool output. Confirms user wants to de
 get_deletion: void input and char output. Error checking user input for confirmation of node to delete
 
 
-
 display_list.c
 display_list: struct address_t input, void output. Displays the linked list, node by node.
 display_node: struct address_t input, void output. Displays single node.
@@ -121,19 +134,13 @@ alias_address_pairs: struct address_t, 2 int inputs, void output. Searches LL fo
                      computers within the network and prints out the matching pairs.
 
 
-
 save_list.c
-save_list: struct address_t input, void output. Saves linked list input to file designated
-           by user
-get_filename: void input, char pointer return. Gets filename from user.
+save_list: struct address_t MYSQL pointer input, void output. Saves linked list input to table
+ip_to_string: four int inputs, string pointer output. Converts IPv4 value to string to be saved
+              in table
 
 quit.c
-quit: void input and output. Exits the program with code of 0.
-
-read_input_list.c
-read_input_list: struct adress_t double pointer input, void output. Prompts user for 
-                 file name to read and reads file line by line parsing input for 
-                 IPv4 address components and alias. Does error checking while reading file
+quit: MYSQL pointer input and output. Exits the program and closes SQL connection.
 
 
 The program is compiled on Zeus on the CS Department Linux Server using gcc. 
