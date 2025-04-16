@@ -1,35 +1,3 @@
-// connect mySQL: mysql -h helios.vse.gmu.edu -u acard -p
-
-// Password: [Provided upon request]
-
-/**  structure for table used in assignment
-CREATE TABLE CS531_Inet (IPv4 varchar(255),alias varchar(255));
-
-START TABLE FOR TESTING
-INSERT INTO CS531_Inet
-  ( IPv4, alias )
-VALUES
-  ('25.12.34.245', '12345678900'),
-  ('25.12.34.26', 'broths'),
-  ('25.12.34.267', 'broths'),
-  ('25.12.345.11', 'broth'),
-  ('25.1111.11.11', 'brot'),
-  ('256.11.11.11', 'bro'),
-  ('11.11.11.11', ''), 
-  ('', 'albert'), 
-  ('2.3.4.5', 'pat'), 
-  ('1.2.3.4', 'alex'), 
-  ('3.4.5.6', 'elle'),
-  ('2.3.4.55', 'pAt'),
-  ('5.6.7.8', 'doug');
-
-  After reading list should be:
-  Address: 5.6.7.8. Alias: doug
-  Address: 3.4.5.6. Alias: elle
-  Address: 1.2.3.4. Alias: alex
-  Address: 2.3.4.5. Alias: pat
-  Address: 25.12.34.26. Alias: broths
-*/
 // header file contains all preprocessor directives
 
 #include <stdio.h>
@@ -47,10 +15,10 @@ VALUES
 #define IP_COMPONENT_LENTH 3
 // Without guidance assuming an arbitrarty file size length of 260
 #define MAX_FILENAME_LENGTH 260
-#define DBNAME "[FILL IN]"
-#define TABLE_NAME "[FILL IN]"
-#define PASSWORD "[FILL IN]"
-#define USERNAME "[FILL IN]"
+#define DBNAME "FILL-IN"
+#define TABLE_NAME "FILL-IN"
+#define PASSWORD "FILL-IN"
+#define USERNAME "FILL-IN"
 
 // global definition for structure used in assignment
 struct address_t{
