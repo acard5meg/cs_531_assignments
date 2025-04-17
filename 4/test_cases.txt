@@ -1,0 +1,64 @@
+Read in IPv4 address/alias from file. 
+Bad number -> Good
+bad alias -> Good
+duplicate number -> Good
+duplicate alias -> Good
+empty file -> Good
+invalid filename -> Good
+
+Make sure you use nodes in different locations of the list including front, rear, somewhere in middle
+
+Do everything on an empty list
+
+For 1)
+Valid IPv4 and valid alias
+valid alias: a
+valid alias: abcdefghij
+
+Invalid first -1 -> Good
+Invalid second 256 -> Good
+invalid third 10003 -> Good
+invalid fourth: 1234 -> Good
+invalid alias: empty -> Good
+invalid alias: abcdefghijk -> Good
+
+repeat ipv4 not alias -> Good, always check display list
+not ipv4 repeat alias -> Good, always check display list
+not ipv4 repeat diffcase alias -> Good
+
+For 2)
+Alias in list -> Good
+Alias not in list -> Good
+
+For 3)
+Alias in list, update properly, redisplay list -> Good
+diff case alias in list, update properly, redisplay list -> Good
+Alias not in list -> Good
+alias in list, address is duplicate -> Good
+alias in list, address is invalid -> Good, could test all 4 components
+
+For 4)
+Proper alias, confirm deletion (first, rear, middle) -> Good
+proper alias, deny deletion -> Good
+proper alias, incorrect input -> Good
+delete from empty list -> Good
+
+For 5)
+Empty list -> Good
+List with x nodes -> Good
+List with x+1 nodes -> Good
+
+For 6)
+Separate values with " " and . -> Good
+Value out of range (Re-prompt) -> Good
+Location doesn't exist (Error message) -> Good
+Good value -> Good
+
+For 7)
+Do it -> Good
+Try to overwrite a file -> Good
+
+For 8)
+Good
+
+All empty list 2-6 good
