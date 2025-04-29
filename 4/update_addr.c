@@ -51,13 +51,20 @@ struct address_t* find_node(struct address_t *ipv4, char curr_alias[]) {
         return NULL;
 
     struct address_t *temp_ptr = ipv4;
+    int comp_val;
 
     while (temp_ptr != NULL) {
-        if (equal_name2(temp_ptr -> alias, curr_alias)) {
+        if (equal_name2(temp_ptr -> alias, curr_alias) == 0) {
             return temp_ptr;
         }
         else {
-            temp_ptr = temp_ptr -> next;
+            // temp_ptr = temp_ptr -> next;
+            comp_val = equal_name2(temp_ptr -> alias, curr_alias);
+
+            if (comp_val > 0)
+                temp_ptr = temp_ptr -> leftChild;
+            else
+                temp_ptr = temp_ptr -> rightChild;
         }
     }
 
@@ -66,27 +73,40 @@ struct address_t* find_node(struct address_t *ipv4, char curr_alias[]) {
 }
 
 // Does case insensitive name checking
-bool equal_name2(char curr_ip4[], char new_ip4[]) {
+int equal_name2(char curr_ip4[], char new_ip4[]) {
     
 
-    if (strlen(curr_ip4) != strlen(new_ip4))
-        return false;
+    // if (strlen(curr_ip4) != strlen(new_ip4))
+    //     return false;
 
     char curr_arr[11], new_arr[11];
-    int i = 0;
-    for (; ((curr_ip4[i] != '\0') && (new_ip4[i] != '\0')); i++) {
+    // int i = 0;
+    // for (; ((curr_ip4[i] != '\0') && (new_ip4[i] != '\0')); i++) {
+    //     curr_arr[i] = tolower(curr_ip4[i]);
+    //     new_arr[i] = tolower(new_ip4[i]);
+    // }
+
+    // curr_arr[i] = '\0';
+    // new_arr[i] = '\0';
+
+    int i = 0, j= 0;
+    for (; curr_ip4[i] != '\0'; i++) {
         curr_arr[i] = tolower(curr_ip4[i]);
-        new_arr[i] = tolower(new_ip4[i]);
     }
-
     curr_arr[i] = '\0';
-    new_arr[i] = '\0';
 
-    if (strcmp(curr_arr, new_arr) != 0)
-        return false;
+    for (; new_ip4[j] != '\0'; j++) {
+        new_arr[j] = tolower(new_ip4[j]);
+    }
+    
+    new_arr[j] = '\0';
+
+    // if (strcmp(curr_arr, new_arr) != 0)
+    //     return false;
 
 
-    return true;
+    // return true;
+    return strcmp(curr_arr, new_arr);
 }
 
 // If user confirms they wish to update the address for the alias this function
@@ -146,15 +166,19 @@ bool check_duplciate_addr(int curr_addr[], struct address_t *all_ipv4) {
 
     struct address_t *temp_ptr = all_ipv4;
     
-    while (temp_ptr != NULL) {
-        if (equal_addresses(curr_addr, temp_ptr)) {
-            return true;
-        }
-        else {
-            temp_ptr = temp_ptr -> next;
-        }
-    }
-    return false;
+    if (duplicate_addr_check(curr_addr, all_ipv4) > 0)
+        return true;
+    else
+        return false;
+    // while (temp_ptr != NULL) {
+    //     if (equal_addresses(curr_addr, temp_ptr)) {
+    //         return true;
+    //     }
+    //     else {
+    //         // temp_ptr = temp_ptr -> next;
+    //     }
+    // }
+    // return false;
 }
 
 bool equal_addresses(int curr_addr[], struct address_t *curr_node) {
@@ -165,4 +189,24 @@ bool equal_addresses(int curr_addr[], struct address_t *curr_node) {
     }
 
     return true;
+}
+
+int duplicate_addr_check(int curr_addr[], struct address_t *node) {
+    int to_return = 0;
+
+    if (node -> leftChild != NULL) {
+        to_return += duplicate_addr_check(curr_addr, node -> leftChild);
+    }
+
+    if (node != NULL) {
+        bool equal_addr = equal_addresses(curr_addr, node);
+        if (equal_addr)
+            to_return += 1;
+    }
+
+    if (node -> rightChild != NULL) {
+        to_return += duplicate_addr_check(curr_addr, node -> rightChild);
+    }
+
+    return to_return;
 }

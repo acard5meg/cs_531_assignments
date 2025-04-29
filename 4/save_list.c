@@ -21,12 +21,8 @@ void save_list(struct address_t *ll) {
         return;
     }
 
+    inorder_save(f, temp);
 
-    while (temp != NULL) {
-        fprintf(f, "%d.%d.%d.%d %s\n", temp -> octet[0], temp -> octet[1],
-            temp -> octet[2], temp -> octet[3], temp -> alias);
-        temp = temp -> next;
-    }
     fclose(f);
 
     free(filename);
@@ -40,7 +36,7 @@ char *get_filename(void) {
     // for now assume the user enters a proper filename
     // Including no invalid characters and proper file extension
 
-    printf("Enter filename.extension to the linked list: ");
+    printf("Enter filename.extension for file to save BST to: ");
 
     int curr_let = 0;
 
@@ -63,4 +59,21 @@ char *get_filename(void) {
     *temp_pointer = '\0';
 
     return return_pointer;
+}
+
+void inorder_save(FILE *f, struct address_t *node) {
+    
+    if (node -> leftChild != NULL) {
+        inorder_save(f, node -> leftChild);
+    }
+
+    if (node != NULL) {
+        // display_node(node);
+        fprintf(f, "%d.%d.%d.%d %s\n", node -> octet[0], node -> octet[1],
+            node -> octet[2], node -> octet[3], node -> alias);
+    }
+
+    if (node -> rightChild != NULL) {
+        inorder_save(f, node -> rightChild);
+    }
 }
