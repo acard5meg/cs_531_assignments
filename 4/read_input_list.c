@@ -20,8 +20,15 @@ void read_input_list(struct address_t **addr) {
     // arbitrary, but no guidance
     char file_line[100];
 
-    while (fgets(file_line, 100, f)) {
+    struct address_t *temp = *addr;
+    
+    while (fgets(file_line, 100, f))
+    {
         struct address_t *new_node = malloc(sizeof(struct address_t));
+        if( new_node == NULL ) {
+            puts("Can't allocate memory!");
+            exit(0);
+        }
         int first, second, third, fourth, total_read;
         char temp_str[75];
         total_read = sscanf(file_line, "%d.%d.%d.%d %s", &first, &second, &third, &fourth, temp_str);
@@ -68,15 +75,32 @@ void read_input_list(struct address_t **addr) {
 
         new_node -> alias[i] = temp_str[i];
 
+        // printf("ABOVE\nNEW NODE: %s\n", new_node -> alias);
+        // if (*addr != NULL)
+        //     printf("CURRENT NODE: %s\n", (*addr) -> alias);
+
+        // printf("Current comp: %s\n\n", new_node->alias);
+
         if (check_duplciates(*addr, new_node)) {
             printf("Already in list: %d.%d.%d.%d %s\n", first, second, third, fourth, temp_str);
             continue;
         }
+        
+        // printf("BELOW\nNEW NODE: %s\n", new_node -> alias);
+        
+        new_node -> leftChild = NULL;
+        new_node -> rightChild = NULL;
+        
+        // printf("NEW COMP\n\n");
+        
+        add_node(addr, new_node);
 
-        new_node -> next = *addr;
+        // printf("NEW COMP\n\n");
+        // if (*addr != NULL)
+        // printf("CURRENT NODE: %s\n", (*addr) -> alias);
+        // new_node -> next = *addr;
 
-        *addr = new_node;
-    
+        // *addr = new_node;
     }
 
     fclose(f);

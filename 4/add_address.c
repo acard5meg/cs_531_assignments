@@ -75,15 +75,21 @@ void add_address(struct address_t **addr) {
         return;
     }
 
-    new_node -> next = *addr;
+    // new_node -> next = *addr;
 
-    *addr = new_node;
+    new_node -> leftChild = NULL;
+    new_node -> rightChild = NULL;
+
+    add_node(addr, new_node);
+
+    // *addr = new_node;
 }
 
 bool valid_ip(int alias) {
     return (alias >= 0 && alias <= 255) ? true : false;
 }
 
+// CHANGES
 bool check_duplciates(struct address_t *curr_ip4, struct address_t *new_ip4) {
 
     if (curr_ip4 == NULL)
@@ -91,28 +97,40 @@ bool check_duplciates(struct address_t *curr_ip4, struct address_t *new_ip4) {
 
     struct address_t *temp_ptr = curr_ip4;
     bool value;
+    int comp_val;
     
     while (temp_ptr != NULL) {
 
         if (equal_structures(temp_ptr, new_ip4)) {
+            // printf("EQUAL STRUCT\n");
             return true;
         }
         else {
-            temp_ptr = temp_ptr -> next;
+            // temp_ptr = temp_ptr -> next;
+
+            comp_val = equal_name(temp_ptr, new_ip4);
+            if (comp_val > 0)
+                temp_ptr = temp_ptr -> leftChild;
+            else
+                temp_ptr = temp_ptr -> rightChild;
         }
     }
     return false;
 }
 
+// CHANGES
 bool equal_structures(struct address_t *curr_ip4, struct address_t *new_ip4) {
-    
-    if (equal_ip(curr_ip4, new_ip4) || equal_name(curr_ip4, new_ip4))
+    bool ip = equal_ip(curr_ip4, new_ip4);
+    int name = equal_name(curr_ip4, new_ip4);
+
+    if (ip || (name == 0))
         return true;
     else
         return false;
 
 }
 
+// NO CHANGES HW 4
 // checks IPv4 address is unique, amounts to one entry being different
 bool equal_ip(struct address_t *curr_ip4, struct address_t *new_ip4) {
 
@@ -128,26 +146,40 @@ bool equal_ip(struct address_t *curr_ip4, struct address_t *new_ip4) {
     return true;
 }
 
+// CHANGES HW 4
 // checks alias is unique accounting for alias names not being case sensitive
-bool equal_name(struct address_t *curr_ip4, struct address_t *new_ip4) {
+int equal_name(struct address_t *curr_ip4, struct address_t *new_ip4) {
     
 
-    if (strlen(curr_ip4 -> alias) != strlen(new_ip4 -> alias))
-        return false;
+    // if (strlen(curr_ip4 -> alias) != strlen(new_ip4 -> alias))
+    //     return strcmp;
+    //     return 1; // anything other than 0 to denote the names are different
 
     char curr_arr[11], new_arr[11];
-    int i = 0;
-    for (; ((curr_ip4 -> alias[i] != '\0') && (new_ip4 -> alias[i] != '\0')); i++) {
+    int i = 0, j= 0;
+    // for (; ((curr_ip4 -> alias[i] != '\0') && (new_ip4 -> alias[i] != '\0')); i++) {
+    //     curr_arr[i] = tolower(curr_ip4 -> alias[i]);
+    //     new_arr[i] = tolower(new_ip4 -> alias[i]);
+    // }
+    for (; curr_ip4 -> alias[i] != '\0'; i++) {
         curr_arr[i] = tolower(curr_ip4 -> alias[i]);
-        new_arr[i] = tolower(new_ip4 -> alias[i]);
+        // new_arr[i] = tolower(new_ip4 -> alias[i]);
     }
-
     curr_arr[i] = '\0';
-    new_arr[i] = '\0';
 
-    if (strcmp(curr_arr, new_arr) != 0)
-        return false;
+    for (; new_ip4 -> alias[j] != '\0'; j++) {
+        // curr_arr[j] = tolower(curr_ip4 -> alias[j]);
+        new_arr[j] = tolower(new_ip4 -> alias[j]);
+    }
+    
+    new_arr[j] = '\0';
+
+    int to_return = strcmp(curr_arr, new_arr);
+    // printf("NAME COMPARISON: %d\n", to_return);
+    return to_return;
+    // if (strcmp(curr_arr, new_arr) != 0)
+    //     return false;
 
 
-    return true;
+    // return true;
 }

@@ -10,14 +10,26 @@ void display_list(struct address_t *ip4) {
     }
 
     struct address_t *temp_ptr = ip4;
-    int num_nodes = 0;
-
-    while (temp_ptr != NULL) {
-        display_node(temp_ptr);
-        num_nodes++;
-        temp_ptr = temp_ptr -> next;
-    }
+    int num_nodes = size(ip4);
+    inorder_traversal(ip4);
+    
     printf("Number of nodes in the list: %d\n", num_nodes);
+
+}
+
+void inorder_traversal(struct address_t *node) {
+
+    if (node -> leftChild != NULL) {
+        inorder_traversal(node -> leftChild);
+    }
+
+    if (node != NULL) {
+        display_node(node);
+    }
+
+    if (node -> rightChild != NULL) {
+        inorder_traversal(node -> rightChild);
+    }
 
 }
 
