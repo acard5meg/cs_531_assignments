@@ -41,8 +41,8 @@ void delete_address(struct address_t **curr_ip4) {
         bool delete = confirm_deletion(return_val);
 
         if (delete)
-            remove_node(curr_ip4, user_input);
-
+            // remove_node(curr_ip4, user_input);
+            delete_node(*curr_ip4, user_input);
     }
 
 
@@ -51,23 +51,23 @@ void delete_address(struct address_t **curr_ip4) {
 // We've prevented a situation where the alias DNE in the list
 // Pointer to a pointer to allow the function to update the 
 // linked list inside the function and not return something
-void remove_node(struct address_t **ipv4, char curr_alias[]) {
+// void remove_node(struct address_t **ipv4, char curr_alias[]) {
 
-    if (equal_name2((*ipv4) -> alias, curr_alias)) {
-        *ipv4 = (*ipv4) -> next;
-        return;
-    }
+//     if (equal_name2((*ipv4) -> alias, curr_alias)) {
+//         *ipv4 = (*ipv4) -> next;
+//         return;
+//     }
 
-    struct address_t *fast = (*ipv4) -> next;
-    struct address_t *slow = (*ipv4);
+//     struct address_t *fast = (*ipv4) -> next;
+//     struct address_t *slow = (*ipv4);
 
-    while (fast != NULL && ! equal_name2(fast -> alias, curr_alias)) {
-        slow = fast;
-        fast = fast -> next;
-    }
+//     while (fast != NULL && ! equal_name2(fast -> alias, curr_alias)) {
+//         slow = fast;
+//         fast = fast -> next;
+//     }
 
-    slow -> next = fast -> next;
-}
+//     slow -> next = fast -> next;
+// }
 
 // The get_deletion() function ensures we'll either have a Y or N
 // so the return statement doesn't need to be inside a loop

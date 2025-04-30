@@ -24,6 +24,8 @@ struct address_t{
 // bst_functions.c // NEW
 void add_node(struct address_t **, struct address_t *);
 int size(struct address_t *);
+struct address_t* delete_node(struct address_t *, char[] );
+struct address_t *find_smallest_node(struct address_t *);
 
 //read_input_list.c
 void read_input_list(struct address_t **); // CHANGES
@@ -53,10 +55,10 @@ int equal_name2(char [], char []); //CHANGES
 int duplicate_addr_check(int [], struct address_t *); // NEW
 
 //delete_address.c
-void delete_address(struct address_t **);
-void remove_node(struct address_t **, char []);
-bool confirm_deletion(struct address_t *);
-char get_deletion(void);
+void delete_address(struct address_t **); // CHANGES
+// void remove_node(struct address_t **, char []);
+bool confirm_deletion(struct address_t *); // no changes
+char get_deletion(void); // no changes
 
 //display_list.c
 void display_list(struct address_t *); // CHANGED
@@ -64,8 +66,10 @@ void display_node(struct address_t *); // no change
 void inorder_traversal(struct address_t *); // NEW
 
 // display_alias.c
-void display_alias(struct address_t *);
-void alias_address_pairs(struct address_t *, int, int);
+void display_alias(struct address_t *); // no changes
+void alias_address_pairs(struct address_t *, int, int); // CHANGES
+void print_pairs(struct address_t *, int, int); // NEW
+int check_in_list(struct address_t *, int, int); // NEW
 
 //save_list.c
 void save_list(struct address_t *); // CHANGES

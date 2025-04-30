@@ -1,4 +1,7 @@
 baker vs. bakers
+- delete 0,1,2 children, root, right and left side
+- ensure find node is correct/updates correct children 
+- copy longer and shorter strings to stress test the strcpy function doesn't seg fault
 Read in IPv4 address/alias from file. 
 Bad number -> Good
 bad alias -> Good

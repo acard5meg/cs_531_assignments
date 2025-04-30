@@ -53,19 +53,40 @@ void display_alias(struct address_t *ip4) {
 void alias_address_pairs(struct address_t *curr_list, int first, int second) {
 
     struct address_t *temp_ptr = curr_list;
-    bool in_list = false;
+    int in_list = check_in_list(temp_ptr, first, second);
 
-    while (temp_ptr != NULL) {
-        if (temp_ptr -> octet[0] == first && temp_ptr -> octet[1] == second) {
-            printf("Address: %d.%d.%d.%d. Alias: %s\n", temp_ptr -> octet[0],
-                temp_ptr -> octet[1], temp_ptr -> octet[2], temp_ptr -> octet[3],
-                temp_ptr -> alias);
-            in_list = true;
-            }
-        temp_ptr = temp_ptr -> next;
+    temp_ptr = curr_list;
+    if (in_list > 0)
+        print_pairs(temp_ptr, first, second);
+    else
+        printf("Location not in list!\n");
+    // if (! in_list)
+            
+}
+
+void print_pairs(struct address_t *node, int first, int second) {
+
+    if (node -> leftChild != NULL) {
+        print_pairs(node -> leftChild, first, second);
     }
 
-    if (! in_list)
-        printf("Location not in list!\n");
-    
+    if (node != NULL && node -> octet[0] == first && node -> octet[1] == second) {
+        // display_node(node);
+        printf("Address: %d.%d.%d.%d. Alias: %s\n", node -> octet[0],
+            node -> octet[1], node -> octet[2], node -> octet[3],
+            node -> alias);
+    }
+
+    if (node -> rightChild != NULL) {
+        print_pairs(node -> rightChild, first, second);
+    }
+}
+
+int check_in_list(struct address_t *node, int first, int second) {
+    if (node == NULL)
+        return 0;
+    if (node -> octet[0] == first && node -> octet[1] == second)
+        return 1;
+    return check_in_list(node->leftChild, first, second) \
+    + check_in_list(node->rightChild, first, second);
 }
