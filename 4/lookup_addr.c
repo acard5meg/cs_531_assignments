@@ -6,6 +6,11 @@
 // If so print IPv4 address
 void lookup_addr(struct address_t *ipv4) {
 
+    if (ipv4 == NULL) {
+        printf("The list is empty!\n");
+        return;
+    }
+
     char *error_message = "Alias doesn't exixt!\n", 
         *user_prompt = "Please enter an alias: ";
 

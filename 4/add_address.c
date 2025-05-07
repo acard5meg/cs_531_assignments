@@ -96,26 +96,31 @@ bool check_duplciates(struct address_t *curr_ip4, struct address_t *new_ip4) {
         return false;
 
     struct address_t *temp_ptr = curr_ip4;
-    bool value;
-    int comp_val;
-    
-    while (temp_ptr != NULL) {
+    // bool value;
+    int comp_val = check_all_node_dups(temp_ptr, new_ip4);
 
-        if (equal_structures(temp_ptr, new_ip4)) {
-            // printf("EQUAL STRUCT\n");
-            return true;
-        }
-        else {
-            // temp_ptr = temp_ptr -> next;
+    // while (temp_ptr != NULL) {
 
-            comp_val = equal_name(temp_ptr, new_ip4);
-            if (comp_val > 0)
-                temp_ptr = temp_ptr -> leftChild;
-            else
-                temp_ptr = temp_ptr -> rightChild;
-        }
-    }
-    return false;
+    //     if (equal_structures(temp_ptr, new_ip4)) {
+    //         // printf("EQUAL STRUCT\n");
+    //         return true;
+    //     }
+    //     else {
+    //         // temp_ptr = temp_ptr -> next;
+
+    //         comp_val = equal_name(temp_ptr, new_ip4);
+    //         if (comp_val > 0)
+    //             temp_ptr = temp_ptr -> leftChild;
+    //         else
+    //             temp_ptr = temp_ptr -> rightChild;
+    //     }
+    // }
+    // return false;
+
+    if (comp_val > 0)
+        return true;
+    else
+        return false;
 }
 
 // CHANGES

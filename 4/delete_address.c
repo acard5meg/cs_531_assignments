@@ -37,12 +37,15 @@ void delete_address(struct address_t **curr_ip4) {
     if (return_val == NULL) {
         printf("%s", error_message);
     }
+    // else if (size(*curr_ip4) == 1) {
+    //     *curr_ip4 = NULL;
+    // }
     else {
         bool delete = confirm_deletion(return_val);
 
         if (delete)
             // remove_node(curr_ip4, user_input);
-            delete_node(*curr_ip4, user_input);
+            *curr_ip4 = delete_node(*curr_ip4, user_input);
     }
 
 

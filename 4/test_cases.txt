@@ -1,7 +1,59 @@
-baker vs. bakers
 - delete 0,1,2 children, root, right and left side
 - ensure find node is correct/updates correct children 
 - copy longer and shorter strings to stress test the strcpy function doesn't seg fault
+- delete empty list
+- delete root from BST with 2 nodes causing errors
+- have to check every node in list for duplicate alias and address
+
+
+
+Tests done:
+deleted node with longer name than replacement
+delete tree w/ one node -> becomes empty and can add back into it
+deleted node with shorter name than replacement
+deleted node with 1 child
+deleted node with 0 child
+deleted node with 2 child
+
+-on import 
+-- invalid alias
+-- invalid ip4
+-- invalid ip3
+-- invalid ip2
+-- invalid ip1
+-- missing alias
+-- missing ip
+-- full empty
+-- repeat ip
+-- case insensitive alias match
+-- duplicate ip from opposite side of tree
+-- import empty file
+-- invalid file name
+
+displayed tree - in alphabetic order
+
+tried to add address with duplicate ip from right subtree but alias goes in left subtree
+tried to add duplicate alias
+
+looked up address
+displayed aliases for location from root, left and right subtree simultaneously
+saved to new file and overwrote file
+
+-empty tree
+-- looked up empty tree
+-- update empty tree
+-- delete from empty tree
+-- displayed empty tree
+-- display alias empty tree
+-- saved empty tree
+-- add to empty tree
+
+
+------------------------------------------
+
+
+
+
 Read in IPv4 address/alias from file. 
 Bad number -> Good
 bad alias -> Good
