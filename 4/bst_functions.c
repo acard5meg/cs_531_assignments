@@ -10,6 +10,9 @@ void add_node(struct address_t **master_list, struct address_t *new_node) {
 
     struct address_t *curr = *master_list, *prev = NULL;
     int comp_val;
+    comp_val = check_all_node_dups(curr, new_node);
+
+    
     while (curr != NULL)
     {
         prev = curr;
@@ -80,6 +83,10 @@ struct address_t* delete_node(struct address_t *root, char key[])
         temp_str[i] = '\0';
 
         strcpy(root->alias, temp_str);
+        root->octet[0] = temp->octet[0];
+        root->octet[1] = temp->octet[1];
+        root->octet[2] = temp->octet[2];
+        root->octet[3] = temp->octet[3];
 
         root->rightChild = delete_node(root->rightChild, temp->alias);
     }
@@ -98,3 +105,32 @@ struct address_t* find_smallest_node(struct address_t *root)
     return curr;
 }
 
+int check_all_node_dups(struct address_t *curr_ip4, struct address_t *new_ip4) {
+    if (curr_ip4 == NULL)
+        return 0;
+
+    int to_add = 0;
+
+    if (equal_structures(curr_ip4, new_ip4))
+        to_add++;
+
+    if (curr_ip4->leftChild != NULL)
+    {
+        // return check_all_node_dups(curr_ip4->leftChild, new_ip4) + to_add;
+        to_add += check_all_node_dups(curr_ip4->leftChild, new_ip4);
+    }
+
+    // if (curr_ip4 != NULL) {
+    //     check_all_alias(curr_ip4);
+    // }
+
+    if (curr_ip4 -> rightChild != NULL) {
+        // return check_all_node_dups(curr_ip4 -> rightChild, new_ip4) + to_add;
+        to_add += check_all_node_dups(curr_ip4 -> rightChild, new_ip4);
+    }
+
+    return to_add;
+}
+// int check_all_address(struct address_t *, struct address_t *) {
+
+// }

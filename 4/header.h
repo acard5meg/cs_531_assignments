@@ -26,6 +26,8 @@ void add_node(struct address_t **, struct address_t *);
 int size(struct address_t *);
 struct address_t* delete_node(struct address_t *, char[] );
 struct address_t *find_smallest_node(struct address_t *);
+int check_all_node_dups(struct address_t *, struct address_t *);
+// int check_all_address(struct address_t *, struct address_t *);
 
 //read_input_list.c
 void read_input_list(struct address_t **); // CHANGES

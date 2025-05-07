@@ -19,7 +19,11 @@ void display_list(struct address_t *ip4) {
 
 void inorder_traversal(struct address_t *node) {
 
-    if (node -> leftChild != NULL) {
+    if (node == NULL)
+        return;
+        
+    if (node->leftChild != NULL)
+    {
         inorder_traversal(node -> leftChild);
     }
 
